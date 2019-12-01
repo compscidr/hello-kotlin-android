@@ -1,5 +1,8 @@
 # hello-kotlin-android
-Aiming to be a starter repo with all of the following tooling setup:
+When starting a new project, I always find getting the tools up and running quickly is a pain, so I
+wanted something for Kotlin which already had everything setup and working.
+
+This aims to be a starter repo with all of the following tooling setup:
 
 TODO:
 - [Junit5](https://junit.org/junit5/docs/current/user-guide/)
