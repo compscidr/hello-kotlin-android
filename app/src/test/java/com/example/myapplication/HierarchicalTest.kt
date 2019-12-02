@@ -5,7 +5,6 @@ import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-//https://www.baeldung.com/kotlin-mockk
 class HierarchicalTest {
     @Test
     fun FooTest() {
@@ -19,6 +18,7 @@ class HierarchicalTest {
         assertEquals("T", bar.nickname)
     }
 
+    // https://www.baeldung.com/kotlin-mockk
     @Test
     fun givenHierarchicalClass_whenMockingIt_thenReturnProperValue() {
         // given
