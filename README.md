@@ -1,5 +1,5 @@
 # hello-kotlin-android
-[![Build Status](https://github.com/compscidr/hello-kotlin-android/workflows/Android%20CI/badge.svg)](https://github.com/compscidr/hello-kotlin-android/actions)
+[![Build Status](https://github.com/compscidr/hello-kotlin-android/workflows/Gradle%20Build/badge.svg)](https://github.com/compscidr/hello-kotlin-android/actions)
 
 When starting a new project, I always find getting the tools up and running quickly is a pain, so I
 wanted something for Kotlin which already had everything setup and working.
