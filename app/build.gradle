@@ -65,6 +65,7 @@ dependencies {
 
     // (Required) Writing and executing Unit Tests on the JUnit Platform
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.5.2"
+    testImplementation "io.mockk:mockk:1.9.3"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.5.2"
 
     // (Optional) If you need "Parameterized Tests"
@@ -76,5 +77,6 @@ dependencies {
 
     // 6) The instrumentation test companion libraries
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.2.0"
+    androidTestImplementation "io.mockk:mockk:1.9.3"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.2.0"
 }

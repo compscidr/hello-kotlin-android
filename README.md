@@ -9,15 +9,16 @@ wanted something for Kotlin which already had everything setup and working.
 
 This aims to be a starter repo with all of the following tooling setup:
 * [Junit5](https://junit.org/junit5/docs/current/user-guide/)
-* [Jacoco](https://www.eclemma.org/jacoco/)
+* [Jacoco](https://www.eclemma.org/jacoco/) 
 * [Github actions](https://github.com/marketplace/actions/gradle-android)
 * [Codecov](https://codecov.io/)
 * [ktlint](https://ktlint.github.io/)
+* [Mockk](https://mockk.io/ANDROID.html)
 
 TODO:
-* [Mockk](https://mockk.io/ANDROID.html)
 * [r8](https://android-developers.googleblog.com/2018/11/r8-new-code-shrinker-from-google-is.html)
 * [Dokka](https://github.com/Kotlin/dokka)
+* [Dagger2](https://medium.com/@elye.project/dagger-2-for-dummies-in-kotlin-with-one-page-simple-code-project-618a5f9f2fe8)
 * [Firebase](https://firebase.google.com/docs/crashlytics)
 * Integration test stubs
 * Instrumented test stubs

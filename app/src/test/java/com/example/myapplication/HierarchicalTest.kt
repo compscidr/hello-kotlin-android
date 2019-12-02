@@ -1,0 +1,40 @@
+package com.example.myapplication
+
+import io.mockk.every
+import io.mockk.mockk
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+
+//https://www.baeldung.com/kotlin-mockk
+class HierarchicalTest {
+    @Test
+    fun FooTest() {
+        val foo = Foo()
+        foo.name = "Test"
+        val bar = Bar()
+        bar.nickname = "T"
+        foo.bar = bar
+        assertEquals("Test", foo.name)
+        assertEquals("T", foo.bar.nickname)
+        assertEquals("T", bar.nickname)
+    }
+
+    @Test
+    fun givenHierarchicalClass_whenMockingIt_thenReturnProperValue() {
+        // given
+        val foo = mockk<Foo> {
+            every { name } returns "Karol"
+            every { bar } returns mockk {
+                every { nickname } returns "Tomato"
+            }
+        }
+
+        // when
+        val name = foo.name
+        val nickname = foo.bar.nickname
+
+        // then
+        assertEquals("Karol", name)
+        assertEquals("Tomato", nickname)
+    }
+}
