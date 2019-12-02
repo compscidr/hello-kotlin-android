@@ -22,7 +22,3 @@ TODO:
 * [Firebase](https://firebase.google.com/docs/crashlytics)
 * Integration test stubs
 * Instrumented test stubs
-* Badges for the various workflow tools
-  * Build Status
-  * Code Coverage
-  * Others?
