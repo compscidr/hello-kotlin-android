@@ -13,5 +13,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Generate Test Report
+        run: ./gradlew jacocoTestReport
+      - name: Upload Test Report to CodeCov
+        # https://github.com/codecov/codecov-action
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./app/build/jacocoTestReportRelease/jacocoTestReportRelease.xml
