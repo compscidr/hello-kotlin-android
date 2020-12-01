@@ -63,7 +63,7 @@ dependencies {
 
     // (Required) Writing and executing Unit Tests on the JUnit Platform
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.0"
-    testImplementation "io.mockk:mockk:1.10.3"
+    testImplementation "io.mockk:mockk:1.9.3"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.0"
 
     // (Optional) If you need "Parameterized Tests"
