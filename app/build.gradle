@@ -74,7 +74,7 @@ dependencies {
     androidTestImplementation "org.junit.jupiter:junit-jupiter-api:5.7.0"
 
     // 6) The instrumentation test companion libraries
-    androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.2.0"
+    androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.2.2"
     androidTestImplementation "io.mockk:mockk:1.10.3"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.2.0"
 }
