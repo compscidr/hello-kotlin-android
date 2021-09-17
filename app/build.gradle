@@ -76,5 +76,5 @@ dependencies {
     // 6) The instrumentation test companion libraries
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.2.2"
     androidTestImplementation "io.mockk:mockk:1.12.0"
-    androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.2.2"
+    androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.3.0"
 }
