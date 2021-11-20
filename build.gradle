@@ -4,7 +4,7 @@ buildscript {
     ext.kotlin_version = '1.5.31'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven {
             url = uri("https://plugins.gradle.org/m2/")
         }
@@ -24,18 +24,10 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-// https://medium.com/@alistair.cerio/android-ktlint-and-pre-commit-git-hook-5dd606e230a9
-task installGitHook(type: Copy) {
-    from new File(rootProject.rootDir, 'pre-commit')
-    into { new File(rootProject.rootDir, '.git/hooks') }
-    fileMode 0777
-}
-tasks.getByPath(':app:preBuild').dependsOn installGitHook
