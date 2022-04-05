@@ -21,7 +21,7 @@ jobs:
         run: ./gradlew jacocoTestReport
       - name: Upload Test Report to CodeCov
         # https://github.com/codecov/codecov-action
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./app/build/jacoco/jacoco.xml
