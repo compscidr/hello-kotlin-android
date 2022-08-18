@@ -9,19 +9,46 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: set up JDK 1.8
-        uses: actions/setup-java@v3
-        with:
-          java-version: 11
-          distribution: temurin
-
+# not needed because using a self-hosted runner with jdk and android already on it:
+# https://github.com/compscidr/docker-github-actions-runner-android
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 11
+#          distribution: temurin
+#      - name: Setup Android SDK
+#        uses: android-actions/setup-android@v2
       - name: Build with Gradle
         run: ./gradlew build
-      - name: Generate Test Report
-        run: ./gradlew jacocoTestReport
+      - name: lint
+        run: ./gradlew app:lint
+      - name: lint results
+        uses: yutailang0119/action-android-lint@v3.1.0
+        with:
+          report-path: app/build/reports/lint/report.xml
+      - name: checkstyle
+        run: ./gradlew app:checkstyle
+      - name: Non-device tests
+        run: ./gradlew testDebugUnitTest
+      - name: On-Device Tests
+        run: adb wait-for-device && ./gradlew connectedCheck
+      - name: Connected Test Coverage Reports
+        run: ./gradlew app:connectedCheck
+      - name: Unit Test Coverage Reports
+        run: ./gradlew app:jacocoTestReport
+      - uses: actions/upload-artifact@v3
+        name: Store Reporting Artifacts
+        if: failure()
+        with:
+          name: app-reports
+          path: |
+            app/build/reports
+            app/build/outputs
+
       - name: Upload Test Report to CodeCov
         # https://github.com/codecov/codecov-action
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./app/build/jacoco/jacoco.xml
+          files: ./app/build/reports/coverage/androidTest/debug/report.xml,./app/build/reports/jacoco/jacocoTestReportDebug/jacocoTestReportDebug.xml
+
