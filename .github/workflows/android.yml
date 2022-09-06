@@ -26,18 +26,14 @@ jobs:
         uses: yutailang0119/action-android-lint@v3.1.0
         with:
           report-path: app/build/reports/lint/report.xml
-      - name: Non-device tests
-        run: ./gradlew testDebugUnitTest
-      - name: Jvm Unit Tests
-        run: ./gradlew testDebugUnitTest
-      - name: On-Device Instrumented Tests
+      - name: Jvm Unit Tests with Coverage Report
+        run: ./gradlew jacocoTestReportDebug
+      - name: On-Device Instrumented Tests with CoverageReport
         run: |
           adb wait-for-device &&
           adb uninstall --user 0 com.example.myapplication || true &&
           adb uninstall --user 0 com.example.myapplication.test || true &&
-          ./gradlew -d connectedCheck
-      - name: Generate Coverage Reports
-        run: ./gradlew app:jacocoTestReport
+          ./gradlew coverageReport
       - uses: actions/upload-artifact@v3
         name: Store Reporting Artifacts
         if: failure()
