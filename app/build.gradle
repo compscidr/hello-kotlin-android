@@ -1,7 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "de.mannodermaus.android-junit5"
-apply plugin: "com.hiya.jacoco-android"
+apply plugin: 'jacoco'
 apply plugin: "org.jmailen.kotlinter"
 apply plugin: "org.jetbrains.dokka"
 
@@ -37,8 +37,9 @@ android {
             minifyEnabled true
         }
         debug {
-            shrinkResources true
-            minifyEnabled true
+            shrinkResources false
+            minifyEnabled false
+            testCoverageEnabled true
         }
     }
 
@@ -46,7 +47,6 @@ android {
         unitTests.all {
             useJUnitPlatform()
             jacoco {
-                destinationFile = file("$buildDir/jacoco/moduleTestsCoverage.exec")
                 includeNoLocationClasses = true
                 excludes = ['jdk.internal.*']
             }
@@ -60,6 +60,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.5.0"
     implementation "androidx.core:core-ktx:1.8.0"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
+    implementation 'androidx.test:core-ktx:1.4.0'
 
     // (Required) Writing and executing Unit Tests on the JUnit Platform
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.9.0"
@@ -77,4 +78,13 @@ dependencies {
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.3.0"
     androidTestImplementation "io.mockk:mockk:1.12.7"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.3.0"
+}
+
+jacoco {
+    toolVersion = '0.8.7'
+}
+
+rootCoverage {
+    includeAndroidTestResults true
+    generateXml true
 }

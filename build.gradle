@@ -21,6 +21,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "nl.neotech.plugin.rootcoverage" version "1.5.3"
+}
+
 allprojects {
     repositories {
         google()
