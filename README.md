@@ -1,6 +1,6 @@
 # hello-kotlin-android
 [![Build Status](https://github.com/compscidr/hello-kotlin-android/workflows/Gradle%20Build/badge.svg)](https://github.com/compscidr/hello-kotlin-android/actions)&nbsp;
-[![codecov](https://codecov.io/gh/compscidr/hello-kotlin-android/branch/master/graph/badge.svg)](https://codecov.io/gh/compscidr/hello-kotlin-android)&nbsp;
+[![codecov](https://codecov.io/gh/compscidr/hello-kotlin-android/branch/main/graph/badge.svg?token=KQYUqNQ3Da)](https://codecov.io/gh/compscidr/hello-kotlin-android)&nbsp;
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)&nbsp;
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
