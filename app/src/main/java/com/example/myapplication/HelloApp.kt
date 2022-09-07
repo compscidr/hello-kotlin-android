@@ -9,6 +9,7 @@ import logcat.logcat
 @HiltAndroidApp
 class HelloApp : Application() {
     override fun onCreate() {
+        super.onCreate()
         AndroidLogcatLogger.installOnDebuggableApp(this@HelloApp, minPriority = LogPriority.VERBOSE)
         logcat { "Logging installed "}
     }
