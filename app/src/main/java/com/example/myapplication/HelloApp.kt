@@ -11,6 +11,6 @@ class HelloApp : Application() {
     override fun onCreate() {
         super.onCreate()
         AndroidLogcatLogger.installOnDebuggableApp(this@HelloApp, minPriority = LogPriority.VERBOSE)
-        logcat { "Logging installed "}
+        logcat { "Logging installed " }
     }
 }

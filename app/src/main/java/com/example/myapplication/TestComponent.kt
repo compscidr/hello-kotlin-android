@@ -7,6 +7,6 @@ import javax.inject.Singleton
 @Singleton
 class TestComponent @Inject constructor() {
     fun someFunction() {
-        logcat { "testComponent: someFunction()"}
+        logcat { "testComponent: someFunction()" }
     }
 }
