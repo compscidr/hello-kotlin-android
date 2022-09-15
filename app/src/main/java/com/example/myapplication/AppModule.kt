@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun provideTestComponent() : TestComponent {
+    fun provideTestComponent(): TestComponent {
         return TestComponent()
     }
 }
