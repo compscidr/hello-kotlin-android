@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import com.example.lib.MyClass
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,5 +14,11 @@ class AppModule {
     @Singleton
     fun provideTestComponent(): TestComponent {
         return TestComponent()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMyClass(): MyClass {
+        return MyClass()
     }
 }
