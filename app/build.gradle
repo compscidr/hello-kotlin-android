@@ -11,12 +11,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.example.myapplication"
         minSdkVersion 15
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         // 1) Make sure to use the AndroidJUnitRunner, of a subclass of it. This requires a dependency on androidx.test:runner, too!
@@ -63,7 +63,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:1.5.1"
-    implementation "androidx.core:core-ktx:1.8.0"
+    implementation "androidx.core:core-ktx:1.9.0"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
     implementation 'androidx.test:core-ktx:1.4.0'
     implementation 'com.squareup.logcat:logcat:0.1'
