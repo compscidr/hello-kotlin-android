@@ -11,6 +11,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          clean: true
 # not needed because using a self-hosted runner with jdk and android already on it:
 # https://github.com/compscidr/docker-github-actions-runner-android
 #      - name: Set up JDK
