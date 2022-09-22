@@ -21,7 +21,7 @@ jobs:
 #      - name: Setup Android SDK
 #        uses: android-actions/setup-android@v2
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew clean build --no-build-cache
       - name: lint
         run: ./gradlew app:lint
       - name: lint results
