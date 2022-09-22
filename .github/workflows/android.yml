@@ -45,6 +45,13 @@ jobs:
           path: |
             app/build/reports
             app/build/outputs
+      # https://github.com/actions/checkout/issues/715
+      # https://github.com/actions/checkout/pull/579
+      - name: clean local tags
+        if: always()
+        run: |
+          cd /tmp/hello-kotlin-android/hello-kotlin-android/hello-kotlin-android && 
+          git tag -d $(git tag -l)
 
       - name: Upload Unit Tests Report to CodeCov
         # https://github.com/codecov/codecov-action
