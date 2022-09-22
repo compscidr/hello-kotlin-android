@@ -33,7 +33,7 @@ jobs:
         run: ./gradlew jacocoTestReportDebug
       - name: On-Device Instrumented Tests with CoverageReport
         run: |
-          adb wait-for-device &&
+          timeout 10 adb wait-for-device &&
           adb uninstall --user 0 com.example.myapplication || true &&
           adb uninstall --user 0 com.example.myapplication.test || true &&
           ./gradlew coverageReport
@@ -53,6 +53,9 @@ jobs:
           cd /tmp/hello-kotlin-android/hello-kotlin-android/hello-kotlin-android && 
           git config --global --add safe.directory /tmp/hello-kotlin-android/hello-kotlin-android/hello-kotlin-android &&
           git tag -d $(git tag -l)
+
+      - name: cleanup adb
+        run: adb kill-server
 
       - name: Upload Unit Tests Report to CodeCov
         # https://github.com/codecov/codecov-action
