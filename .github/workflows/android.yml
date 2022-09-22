@@ -51,6 +51,7 @@ jobs:
         if: always()
         run: |
           cd /tmp/hello-kotlin-android/hello-kotlin-android/hello-kotlin-android && 
+          git config --global --add safe.directory /tmp/hello-kotlin-android/hello-kotlin-android/hello-kotlin-android &&
           git tag -d $(git tag -l)
 
       - name: Upload Unit Tests Report to CodeCov
