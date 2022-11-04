@@ -1,7 +1,6 @@
 package com.example.myapplication
 
 import android.app.Application
-import android.util.Log
 import dagger.hilt.android.HiltAndroidApp
 import org.slf4j.LoggerFactory
 

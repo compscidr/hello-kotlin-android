@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.lib.MyClass
 import dagger.hilt.android.AndroidEntryPoint
 import org.slf4j.LoggerFactory
-//import logcat.logcat
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -21,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun testObfuscation() {
         Log.d("LOGSTRING", "TEST MESSAGE")
-        //logcat { "logcat test" }
         logger.debug("logger test")
     }
 

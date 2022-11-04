@@ -17,7 +17,7 @@ This aims to be a starter repo with all of the following tooling setup:
 * [Dokka](https://github.com/Kotlin/dokka)
 * [r8](https://android-developers.googleblog.com/2018/11/r8-new-code-shrinker-from-google-is.html)
 * [Dagger2](https://medium.com/@elye.project/dagger-2-for-dummies-in-kotlin-with-one-page-simple-code-project-618a5f9f2fe8)
-* [Logcat](https://github.com/square/logcat)
+* [Logback Android](https://github.com/tony19/logback-android)
 * [Papertrail](https://papertrailapp.com/)
 * Unit test examples
 * Instrumented test examples
