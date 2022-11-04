@@ -5,11 +5,13 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lib.MyClass
 import dagger.hilt.android.AndroidEntryPoint
-import logcat.logcat
+import org.slf4j.LoggerFactory
+//import logcat.logcat
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val logger = LoggerFactory.getLogger(javaClass)
 
     @Inject
     lateinit var testComponent: TestComponent
@@ -19,7 +21,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun testObfuscation() {
         Log.d("LOGSTRING", "TEST MESSAGE")
-        logcat { "logcat test" }
+        //logcat { "logcat test" }
+        logger.debug("logger test")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

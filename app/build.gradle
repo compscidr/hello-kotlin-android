@@ -19,6 +19,7 @@ android {
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         // 1) Make sure to use the AndroidJUnitRunner, of a subclass of it. This requires a dependency on androidx.test:runner, too!
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // 2) Connect JUnit 5 to the runner
@@ -27,8 +28,8 @@ android {
 
     // 3) Java 8 is required
     compileOptions {
-        setSourceCompatibility(JavaVersion.VERSION_1_8)
-        setTargetCompatibility(JavaVersion.VERSION_1_8)
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     // 4) JUnit 5 will bundle in files with identical paths; exclude them
@@ -61,19 +62,26 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "androidx.appcompat:appcompat:1.5.1"
     implementation "androidx.core:core-ktx:1.9.0"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
-    implementation 'androidx.test:core-ktx:1.4.0'
-    implementation 'com.squareup.logcat:logcat:0.1'
+    implementation "androidx.test:core-ktx:1.4.0"
     implementation "com.google.dagger:hilt-android:${hilt_version}"
     implementation project(path: ':lib')
     kapt "com.google.dagger:hilt-compiler:${hilt_version}"
 
+    // logging
+    implementation "org.slf4j:slf4j-api:${slf4j_version}"
+    implementation "com.github.compscidr:logback-android:slf4f-2.0.3-SNAPSHOT"
+    implementation ("com.papertrailapp:logback-syslog4j:1.0.0") {
+        exclude group: "ch.qos.logback"
+    }
+
     // (Required) Writing and executing Unit Tests on the JUnit Platform
     testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiter_version"
-    testImplementation "io.mockk:mockk:1.12.8"
+    testImplementation "io.mockk:mockk:${mockk_version}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiter_version"
 
     // (Optional) If you need "Parameterized Tests"
@@ -85,7 +93,7 @@ dependencies {
 
     // 6) The instrumentation test companion libraries
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.3.0"
-    androidTestImplementation "io.mockk:mockk:1.12.8"
+    androidTestImplementation "io.mockk:mockk:${mockk_version}"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.3.0"
 }
 

@@ -1,12 +1,4 @@
 <configuration>
-    <appender name="logcat" class="ch.qos.logback.classic.android.LogcatAppender">
-        <tagEncoder>
-            <pattern>%logger{12}</pattern>
-        </tagEncoder>
-        <encoder>
-            <pattern>[%-20thread] %msg</pattern>
-        </encoder>
-    </appender>
     <appender name="syslog-tls" class="com.papertrailapp.logback.Syslog4jAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%d{MMM dd HH:mm:ss} Android hello-kotlin-android: %-5level %logger{35} %m%n</pattern>
@@ -22,8 +14,16 @@
     <appender name="async" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="syslog-tls" />
     </appender>
-    <root level="DEBUG">
-        <appender-ref ref="logcat" />
+    <appender name="logcat" class="ch.qos.logback.classic.android.LogcatAppender">
+        <tagEncoder>
+            <pattern>%logger{12}</pattern>
+        </tagEncoder>
+        <encoder>
+            <pattern>[%-20thread] %msg</pattern>
+        </encoder>
+    </appender>
+    <root level="TRACE">
         <appender-ref ref="async" />
+        <appender-ref ref="logcat" />
     </root>
 </configuration>
