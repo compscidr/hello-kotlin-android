@@ -55,6 +55,7 @@ jobs:
           git tag -d $(git tag -l)
 
       - name: cleanup adb
+        if: always()
         run: adb kill-server
 
       - name: Upload Unit Tests Report to CodeCov
