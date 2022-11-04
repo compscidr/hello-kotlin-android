@@ -13,6 +13,12 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+
 dependencies {
     implementation "org.slf4j:slf4j-api:${slf4j_version}"
 }
