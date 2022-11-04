@@ -74,3 +74,13 @@ jobs:
           flags: instrumentedtests
           files: ./app/build/reports/jacoco.xml
 
+      - name: Export environment variables
+        run: |
+          echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/release/version_name.txt)" >> $GITHUB_ENV
+          echo "VERSION_CODE=$(cat app/build/outputs/app_versioning/release/version_code.txt)" >> $GITHUB_ENV
+
+      - name: Build and Publish Release
+        env:
+          GH_USER: ${{ secrets.GH_USER }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: ./gradlew assemble bundle publishAllPublicationsToGithubPackagesRepository

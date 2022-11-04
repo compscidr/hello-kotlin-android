@@ -112,3 +112,13 @@ rootCoverage {
     includeAndroidTestResults true
     generateXml true
 }
+
+// https://github.com/ReactiveCircus/app-versioning
+appVersioning {
+    overrideVersionCode { gitTag, providers, variantInfo ->
+        gitTag.commitsSinceLatestTag
+    }
+}
+
+// https://proandroiddev.com/android-libraries-on-github-packages-21f135188d58
+apply from: file('publish.gradle')

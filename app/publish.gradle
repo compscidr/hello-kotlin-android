@@ -1,0 +1,46 @@
+// https://proandroiddev.com/android-libraries-on-github-packages-21f135188d58
+apply plugin: 'maven-publish'
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/compscidr/hello-kotlin-android")
+            credentials {
+                username = System.getenv('GH_USER') ?: project.properties['GH_USER']
+                password = System.getenv('GH_PAT') ?: project.properties['GH_PAT']
+            }
+        }
+        maven {
+            name = 'CustomMavenRepo'
+            url = "file://${buildDir}/repo"
+        }
+    }
+    publications {
+        semver_test(MavenPublication) {
+            groupId "com.example"
+            artifactId "myapplication"
+            version System.getenv('VERSION_NAME')+"-"+System.getenv('VERSION_CODE')
+            artifact("$buildDir/outputs/apk/release/app-release-unsigned.apk")
+            artifact("$buildDir/outputs/bundle/release/app-release.aab")
+            artifact(sourceJar)
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+
+                //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.api.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+    }
+}
