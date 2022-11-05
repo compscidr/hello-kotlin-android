@@ -45,6 +45,7 @@ publishing {
     }
 }
 
-tasks.withType(PublishToMavenRepository).configureEach {
-    inputFile.from(packageRelease)
+tasks.withType(PublishToMavenRepository) {
+    dependsOn("assembleRelease")
+    dependsOn("bundleRelease")
 }
