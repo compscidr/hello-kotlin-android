@@ -22,7 +22,7 @@ publishing {
         }
     }
     publications {
-        semver_test(MavenPublication) {
+        myapplication(MavenPublication) {
             groupId "com.example"
             artifactId "myapplication"
             version System.getenv('VERSION_NAME')+"-"+System.getenv('VERSION_CODE')
@@ -43,4 +43,8 @@ publishing {
             }
         }
     }
+}
+
+tasks.withType(PublishToMavenRepository).configureEach {
+    inputFile.from(packageRelease)
 }
