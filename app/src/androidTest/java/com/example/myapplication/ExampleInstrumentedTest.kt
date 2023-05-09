@@ -5,6 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import de.mannodermaus.junit5.ActivityScenarioExtension
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Timeout
 import org.junit.jupiter.api.extension.RegisterExtension
 
 /**
@@ -12,18 +13,21 @@ import org.junit.jupiter.api.extension.RegisterExtension
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
+@Timeout(30)
 class ExampleInstrumentedTest {
+    @JvmField
     @RegisterExtension
     var scenarioExtension = ActivityScenarioExtension.launch(
         MainActivity::class.java
     )
 
     @Test
-    fun useAppContext(scenario: ActivityScenario<MainActivity>) {
+    fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.example.myapplication", appContext.packageName)
 
+        val scenario = scenarioExtension.scenario
         scenario.onActivity { }
     }
 }
