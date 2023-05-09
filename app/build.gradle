@@ -75,7 +75,7 @@ dependencies {
 
     // logging
     implementation "org.slf4j:slf4j-api:${slf4j_version}"
-    implementation "com.github.compscidr:logback-android:slf4f-2.0.3-SNAPSHOT"
+    implementation "com.github.tony19:logback-android:3.0.0"
     implementation ("com.papertrailapp:logback-syslog4j:1.0.0") {
         exclude group: "ch.qos.logback"
     }
@@ -96,6 +96,10 @@ dependencies {
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.3.0"
     androidTestImplementation "io.mockk:mockk:${mockk_version}"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.3.0"
+}
+
+configurations.testImplementation {
+    exclude module: 'logback-android'
 }
 
 jacoco {
