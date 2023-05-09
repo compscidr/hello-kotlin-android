@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import de.mannodermaus.junit5.ActivityScenarioExtension
 import org.junit.jupiter.api.Assertions.assertEquals
