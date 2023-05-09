@@ -24,8 +24,8 @@ class ExampleInstrumentedTest {
         MainActivity::class.java
     )
 
-    @Tag("OTHERTEST")
     @Test
+    @Tag("OTHERTEST")
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
@@ -35,8 +35,8 @@ class ExampleInstrumentedTest {
         scenario.onActivity { }
     }
 
-    @Tag("TAGTEST")
     @Test
+    @Tag("TAGTEST")
     fun test2() {
         logger.debug("test2")
     }

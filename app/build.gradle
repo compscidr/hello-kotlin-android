@@ -70,16 +70,16 @@ android {
             boolean excludedTagsPropertySet = excludedTagsProperty != null
 
             if (includedTagsPropertySet && excludedTagsPropertySet) {
-                filters {
+                filters("debug") {
                     includeTags includedTagsProperty
                     excludeTags excludedTagsProperty
                 }
             } else if (includedTagsPropertySet && !excludedTagsPropertySet) {
-                filters {
+                filters("debug") {
                     includeTags includedTagsProperty
                 }
             } else if (!includedTagsPropertySet && excludedTagsPropertySet) {
-                filters {
+                filters("debug") {
                     excludeTags excludedTagsProperty
                 }
             }
