@@ -147,7 +147,7 @@ configurations.testImplementation {
 }
 
 jacoco {
-    toolVersion = '0.8.7'
+    toolVersion = '0.8.10'
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
