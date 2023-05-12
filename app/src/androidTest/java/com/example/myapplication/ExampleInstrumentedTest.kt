@@ -25,7 +25,7 @@ class ExampleInstrumentedTest {
     )
 
     @Test
-    @Tag("OTHERTEST")
+    //@Tag("TEST1") // tags broken: https://github.com/mannodermaus/android-junit5/issues/298
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
@@ -36,8 +36,14 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    @Tag("TAGTEST")
+    //@Tag("TEST2")
     fun test2() {
         logger.debug("test2")
+    }
+
+    @Test
+    //@Tag("TEST3")
+    fun test3() {
+        logger.debug("test3")
     }
 }

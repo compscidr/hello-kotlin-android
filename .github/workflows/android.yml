@@ -31,12 +31,10 @@ jobs:
           report-path: app/build/reports/lint/report.xml
       - name: Jvm Unit Tests with Coverage Report
         run: ./gradlew jacocoTestReportDebug
+      - name: Clean Packages
+        run: bash ./scripts/clean-packages.sh
       - name: On-Device Instrumented Tests with CoverageReport
-        run: |
-          timeout 10 adb wait-for-device &&
-          adb uninstall --user 0 com.example.myapplication || true &&
-          adb uninstall --user 0 com.example.myapplication.test || true &&
-          ./gradlew coverageReport
+        run: ./gradlew coverageReport
       - uses: actions/upload-artifact@v3
         name: Store Reporting Artifacts
         if: failure()

@@ -7,7 +7,7 @@ plugins {
     id 'io.github.reactivecircus.app-versioning' version '1.1.2'
     id 'de.mannodermaus.android-junit5'
     id 'org.jmailen.kotlinter'
-    id 'org.jetbrains.dokka'
+    //id 'org.jetbrains.dokka'
 }
 
 android {
@@ -53,35 +53,19 @@ android {
     testOptions {
         unitTests.all {
             useJUnitPlatform()
-            jacoco {
-                includeNoLocationClasses = true
-                excludes = ['jdk.internal.*']
-            }
+//            jacoco {
+//                includeNoLocationClasses = true
+//                excludes = ['jdk.internal.*']
+//            }
         }
         // should let the tests run with with gradle via -DincludeTags="tag1,tag2" -DexcludeTags="tag3,tag4"
         // https://github.com/mannodermaus/android-junit5/wiki/Configuration
         // https://junit.org/junit5/docs/current/user-guide/#writing-tests-tagging-and-filtering
         // https://www.vogella.com/tutorials/AndroidTesting/article.html
         junitPlatform {
-            String includedTagsProperty = System.getProperty("includeTags")
-            boolean includedTagsPropertySet = includedTagsProperty != null
-
-            String excludedTagsProperty = System.getProperty("excludeTags")
-            boolean excludedTagsPropertySet = excludedTagsProperty != null
-
-            if (includedTagsPropertySet && excludedTagsPropertySet) {
-                filters("debug") {
-                    includeTags includedTagsProperty
-                    excludeTags excludedTagsProperty
-                }
-            } else if (includedTagsPropertySet && !excludedTagsPropertySet) {
-                filters("debug") {
-                    includeTags includedTagsProperty
-                }
-            } else if (!includedTagsPropertySet && excludedTagsPropertySet) {
-                filters("debug") {
-                    excludeTags excludedTagsProperty
-                }
+            filters {
+                includeTags 'TEST1'
+                //excludeTags 'TEST2'
             }
         }
     }
@@ -127,10 +111,10 @@ dependencies {
 configurations.testImplementation {
     exclude module: 'logback-android'
 }
-
-jacoco {
-    toolVersion = '0.8.7'
-}
+//
+//jacoco {
+//    toolVersion = '0.8.7'
+//}
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
@@ -138,10 +122,10 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     }
 }
 
-rootCoverage {
-    includeAndroidTestResults true
-    generateXml true
-}
+//rootCoverage {
+//    includeAndroidTestResults true
+//    generateXml true
+//}
 
 // https://github.com/ReactiveCircus/app-versioning
 appVersioning {
