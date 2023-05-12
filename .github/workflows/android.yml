@@ -62,17 +62,6 @@ jobs:
           flags: instrumentedtests
           files: ./app/build/reports/coverage/androidTest/debug/connected/report.xml
 
-      - name: Export environment variables
-        run: |
-          echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/release/version_name.txt)" >> $GITHUB_ENV
-          echo "VERSION_CODE=$(cat app/build/outputs/app_versioning/release/version_code.txt)" >> $GITHUB_ENV
-
-      - name: Build and Publish Release
-        env:
-          GH_USER: ${{ secrets.GH_USER }}
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: ./gradlew assemble bundle publishAllPublicationsToGithubPackagesRepository
-
       # https://github.com/actions/checkout/issues/715
       # https://github.com/actions/checkout/pull/579
       - name: clean local tags
