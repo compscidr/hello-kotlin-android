@@ -46,4 +46,4 @@ build
 *.ipr
 *~
 *.swp
-© 2019 GitHub, Inc.
+*.exec
