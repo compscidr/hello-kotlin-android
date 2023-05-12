@@ -20,7 +20,7 @@ class ExampleInstrumentedTest {
     @JvmField
     @RegisterExtension
     var scenarioExtension = ActivityScenarioExtension.launch(
-        MainActivity::class.java
+        MainActivity::class.java,
     )
 
     // @Tag("TEST1") // tags broken: https://github.com/mannodermaus/android-junit5/issues/298
