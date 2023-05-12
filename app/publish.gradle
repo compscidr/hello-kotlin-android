@@ -1,10 +1,10 @@
 // https://proandroiddev.com/android-libraries-on-github-packages-21f135188d58
 apply plugin: 'maven-publish'
 
-task sourceJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier "sources"
-}
+//task sourceJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier "sources"
+//}
 
 publishing {
     repositories {
@@ -28,7 +28,7 @@ publishing {
             version System.getenv('VERSION_NAME')+"-"+System.getenv('VERSION_CODE')
             artifact("$buildDir/outputs/apk/release/app-release-unsigned.apk")
             artifact("$buildDir/outputs/bundle/release/app-release.aab")
-            artifact(sourceJar)
+            //artifact(sourceJar)
 
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')

@@ -7,7 +7,8 @@ plugins {
     id 'io.github.reactivecircus.app-versioning' version '1.3.1'
     id 'de.mannodermaus.android-junit5'
     id 'org.jmailen.kotlinter'
-    id 'org.jetbrains.dokka'
+    id 'jacoco'
+    //id 'org.jetbrains.dokka'
 }
 
 android {
@@ -15,6 +16,7 @@ android {
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
     defaultConfig {
+        testInstrumentationRunnerArguments runnerBuilder: 'de.mannodermaus.junit5.AndroidJUnit5Builder'
         applicationId "com.example.myapplication"
         minSdkVersion 16
         targetSdkVersion 33
@@ -24,7 +26,6 @@ android {
         // 1) Make sure to use the AndroidJUnitRunner, of a subclass of it. This requires a dependency on androidx.test:runner, too!
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         // 2) Connect JUnit 5 to the runner
-        testInstrumentationRunnerArgument("runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder")
     }
 
     // 3) Java 8 is required
@@ -32,11 +33,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    packagingOptions {
+        jniLibs {
+            excludes += ['META-INF/LICENSE*']
+        }
+        resources {
+            excludes += ['META-INF/LICENSE*']
+        }
+    }
 
     // 4) JUnit 5 will bundle in files with identical paths; exclude them
-    packagingOptions {
-        exclude("META-INF/LICENSE*")
-    }
 
     buildTypes {
         release {
@@ -55,7 +61,45 @@ android {
             useJUnitPlatform()
             jacoco {
                 includeNoLocationClasses = true
-                excludes = ['jdk.internal.*']
+                excludes = [
+                        'jdk.internal.*',
+                ]
+            }
+        }
+        // should let the tests run with with gradle via -DincludeTags="tag1,tag2" -DexcludeTags="tag3,tag4"
+        // https://github.com/mannodermaus/android-junit5/wiki/Configuration
+        // https://junit.org/junit5/docs/current/user-guide/#writing-tests-tagging-and-filtering
+        // https://www.vogella.com/tutorials/AndroidTesting/article.html
+        junitPlatform {
+            filters {
+                //includeTags 'TEST1'
+                //excludeTags 'TEST2'
+            }
+        }
+        // should let the tests run with with gradle via -DincludeTags="tag1,tag2" -DexcludeTags="tag3,tag4"
+        // https://github.com/mannodermaus/android-junit5/wiki/Configuration
+        // https://junit.org/junit5/docs/current/user-guide/#writing-tests-tagging-and-filtering
+        // https://www.vogella.com/tutorials/AndroidTesting/article.html
+        junitPlatform {
+            String includedTagsProperty = System.getProperty("includeTags")
+            boolean includedTagsPropertySet = includedTagsProperty != null
+
+            String excludedTagsProperty = System.getProperty("excludeTags")
+            boolean excludedTagsPropertySet = excludedTagsProperty != null
+
+            if (includedTagsPropertySet && excludedTagsPropertySet) {
+                filters("debug") {
+                    includeTags includedTagsProperty
+                    excludeTags excludedTagsProperty
+                }
+            } else if (includedTagsPropertySet && !excludedTagsPropertySet) {
+                filters("debug") {
+                    includeTags includedTagsProperty
+                }
+            } else if (!includedTagsPropertySet && excludedTagsPropertySet) {
+                filters("debug") {
+                    excludeTags excludedTagsProperty
+                }
             }
         }
     }
@@ -65,17 +109,17 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:1.5.1"
-    implementation "androidx.core:core-ktx:1.9.0"
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "androidx.core:core-ktx:1.10.1"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
-    implementation "androidx.test:core-ktx:1.4.0"
+    implementation "androidx.test:core-ktx:1.5.0"
     implementation "com.google.dagger:hilt-android:${hilt_version}"
     implementation project(path: ':lib')
     kapt "com.google.dagger:hilt-compiler:${hilt_version}"
 
     // logging
     implementation "org.slf4j:slf4j-api:${slf4j_version}"
-    implementation "com.github.compscidr:logback-android:slf4f-2.0.3-SNAPSHOT"
+    implementation "com.github.tony19:logback-android:3.0.0"
     implementation ("com.papertrailapp:logback-syslog4j:1.0.0") {
         exclude group: "ch.qos.logback"
     }
@@ -89,13 +133,17 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-params:$jupiter_version"
 
     // 5) Test Runner, if you don't have it already
-    androidTestImplementation "androidx.test:runner:1.4.0"
+    androidTestImplementation "androidx.test:runner:1.5.2"
     androidTestImplementation "org.junit.jupiter:junit-jupiter-api:$jupiter_version"
 
     // 6) The instrumentation test companion libraries
     androidTestImplementation "de.mannodermaus.junit5:android-test-core:1.3.0"
     androidTestImplementation "io.mockk:mockk:${mockk_version}"
     androidTestRuntimeOnly "de.mannodermaus.junit5:android-test-runner:1.3.0"
+}
+
+configurations.testImplementation {
+    exclude module: 'logback-android'
 }
 
 jacoco {
@@ -106,11 +154,6 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
         jvmTarget = "11"
     }
-}
-
-rootCoverage {
-    includeAndroidTestResults true
-    generateXml true
 }
 
 // https://github.com/ReactiveCircus/app-versioning

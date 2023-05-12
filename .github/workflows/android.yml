@@ -12,15 +12,13 @@ jobs:
         with:
           fetch-depth: 0
           clean: true
-# not needed because using a self-hosted runner with jdk and android already on it:
-# https://github.com/compscidr/docker-github-actions-runner-android
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 11
-#          distribution: temurin
-#      - name: Setup Android SDK
-#        uses: android-actions/setup-android@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
       - name: Build with Gradle
         run: ./gradlew clean build --no-build-cache
       - name: lint
@@ -31,12 +29,10 @@ jobs:
           report-path: app/build/reports/lint/report.xml
       - name: Jvm Unit Tests with Coverage Report
         run: ./gradlew jacocoTestReportDebug
-      - name: On-Device Instrumented Tests with CoverageReport
-        run: |
-          timeout 10 adb wait-for-device &&
-          adb uninstall --user 0 com.example.myapplication || true &&
-          adb uninstall --user 0 com.example.myapplication.test || true &&
-          ./gradlew coverageReport
+      - name: Clean Packages
+        run: bash ./scripts/clean-packages.sh
+      - name: On-Device Instrumented Tests
+        run: ./gradlew connectedCheck
       - uses: actions/upload-artifact@v3
         name: Store Reporting Artifacts
         if: failure()
@@ -64,18 +60,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: instrumentedtests
-          files: ./app/build/reports/jacoco.xml
-
-      - name: Export environment variables
-        run: |
-          echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/release/version_name.txt)" >> $GITHUB_ENV
-          echo "VERSION_CODE=$(cat app/build/outputs/app_versioning/release/version_code.txt)" >> $GITHUB_ENV
-
-      - name: Build and Publish Release
-        env:
-          GH_USER: ${{ secrets.GH_USER }}
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: ./gradlew assemble bundle publishAllPublicationsToGithubPackagesRepository
+          files: ./app/build/reports/coverage/androidTest/debug/connected/report.xml
 
       # https://github.com/actions/checkout/issues/715
       # https://github.com/actions/checkout/pull/579
