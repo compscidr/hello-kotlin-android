@@ -31,8 +31,6 @@ jobs:
         run: ./gradlew jacocoTestReportDebug
       - name: Clean Packages
         run: bash ./scripts/clean-packages.sh
-#      - name: On-Device Instrumented Tests with CoverageReport
-#        run: ./gradlew coverageReport
       - name: On-Device Instrumented Tests
         run: ./gradlew connectedCheck
       - uses: actions/upload-artifact@v3
@@ -62,7 +60,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: instrumentedtests
-          files: ./app/build/reports/jacoco.xml
+          files: ./app/build/reports/coverage/androidTest/debug/connected/report.xml
 
       - name: Export environment variables
         run: |
