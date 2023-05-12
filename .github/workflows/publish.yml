@@ -20,6 +20,8 @@ jobs:
           distribution: temurin
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
+      - name: Build with Gradle
+        run: ./gradlew clean build --no-build-cache
       - name: Export environment variables
         run: |
           echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/release/version_name.txt)" >> $GITHUB_ENV
