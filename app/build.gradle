@@ -68,6 +68,32 @@ android {
                 //excludeTags 'TEST2'
             }
         }
+        // should let the tests run with with gradle via -DincludeTags="tag1,tag2" -DexcludeTags="tag3,tag4"
+        // https://github.com/mannodermaus/android-junit5/wiki/Configuration
+        // https://junit.org/junit5/docs/current/user-guide/#writing-tests-tagging-and-filtering
+        // https://www.vogella.com/tutorials/AndroidTesting/article.html
+        junitPlatform {
+            String includedTagsProperty = System.getProperty("includeTags")
+            boolean includedTagsPropertySet = includedTagsProperty != null
+
+            String excludedTagsProperty = System.getProperty("excludeTags")
+            boolean excludedTagsPropertySet = excludedTagsProperty != null
+
+            if (includedTagsPropertySet && excludedTagsPropertySet) {
+                filters("debug") {
+                    includeTags includedTagsProperty
+                    excludeTags excludedTagsProperty
+                }
+            } else if (includedTagsPropertySet && !excludedTagsPropertySet) {
+                filters("debug") {
+                    includeTags includedTagsProperty
+                }
+            } else if (!includedTagsPropertySet && excludedTagsPropertySet) {
+                filters("debug") {
+                    excludeTags excludedTagsProperty
+                }
+            }
+        }
     }
 }
 
