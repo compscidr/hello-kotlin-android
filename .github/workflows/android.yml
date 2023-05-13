@@ -6,7 +6,8 @@ jobs:
   build:
 
     runs-on: self-hosted
-
+    environment:
+      name: dev
     steps:
       - uses: actions/checkout@v3
         with:
@@ -19,6 +20,11 @@ jobs:
           distribution: temurin
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
+      - name: Create local.properties file
+        run: echo PROPERTY_SECRET=property_test >> local.properties
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
       - name: Build with Gradle
         run: ./gradlew clean build --no-build-cache
       - name: lint
