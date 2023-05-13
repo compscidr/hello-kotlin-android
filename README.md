@@ -14,13 +14,17 @@ This aims to be a starter repo with all of the following tooling setup:
 * [Codecov](https://codecov.io/)
 * [ktlint](https://ktlint.github.io/)
 * [Mockk](https://mockk.io/ANDROID.html)
-* [Dokka](https://github.com/Kotlin/dokka)
+* ~[Dokka](https://github.com/Kotlin/dokka)~ - temp broken until support catches up
 * [r8](https://android-developers.googleblog.com/2018/11/r8-new-code-shrinker-from-google-is.html)
 * [Dagger2](https://medium.com/@elye.project/dagger-2-for-dummies-in-kotlin-with-one-page-simple-code-project-618a5f9f2fe8)
 * [Logback Android](https://github.com/tony19/logback-android)
 * [Papertrail](https://papertrailapp.com/)
 * Unit test examples
 * Instrumented test examples
+
+## Secrets
+Secrets are passed in via `local.properties` or `.env` or via environment variables. There is an example in the GH workflows which shows how to pass in via
+`local.properties` and via environment variables. It will also work with a `.env` in the app directory.
 
 TODO:
 * [Firebase](https://firebase.google.com/docs/crashlytics)
