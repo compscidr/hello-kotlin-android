@@ -20,6 +20,8 @@ jobs:
           distribution: temurin
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
+      - name: Create local.properties file
+        run: echo PROPERTY_SECRET=property_secret >> local.properties
       - name: Build with Gradle
         run: ./gradlew clean build --no-build-cache
       - name: lint
@@ -28,8 +30,6 @@ jobs:
         uses: yutailang0119/action-android-lint@v3.1.0
         with:
           report-path: app/build/reports/lint/report.xml
-      - name: Create local.properties file
-        run: echo PROPERTY_SECRET=property_secret >> local.properties
       - name: Jvm Unit Tests with Coverage Report
         run: ./gradlew jacocoTestReportDebug
       - name: Clean Packages
