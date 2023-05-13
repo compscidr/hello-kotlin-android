@@ -28,6 +28,8 @@ jobs:
         uses: yutailang0119/action-android-lint@v3.1.0
         with:
           report-path: app/build/reports/lint/report.xml
+      - name: Create local.properties file
+        run: echo PROPERTY_SECRET=property_secret >> local.properties
       - name: Jvm Unit Tests with Coverage Report
         run: ./gradlew jacocoTestReportDebug
       - name: Clean Packages
