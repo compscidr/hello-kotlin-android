@@ -22,12 +22,14 @@ publishing {
         }
     }
     publications {
+        // in theory each of these artifacts might have different compiled in secrets or something
+        // to make them different, but for now they're all the same just to test the workflow
         dev(MavenPublication) {
             groupId "com.example"
             artifactId "myapplication.dev"
             version System.getenv('VERSION_NAME')+"-"+System.getenv('VERSION_CODE')
-            artifact("$buildDir/outputs/apk/release/app-release-unsigned-dev.apk")
-            artifact("$buildDir/outputs/bundle/release/app-release-dev.aab")
+            artifact("$buildDir/outputs/apk/release/app-release-unsigned.apk")
+            artifact("$buildDir/outputs/bundle/release/app-release.aab")
 
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
@@ -45,8 +47,8 @@ publishing {
             groupId "com.example"
             artifactId "myapplication.staging"
             version System.getenv('VERSION_NAME')+"-"+System.getenv('VERSION_CODE')
-            artifact("$buildDir/outputs/apk/release/app-release-unsigned-staging.apk")
-            artifact("$buildDir/outputs/bundle/release/app-release-staging.aab")
+            artifact("$buildDir/outputs/apk/release/app-release-unsigned.apk")
+            artifact("$buildDir/outputs/bundle/release/app-release.aab")
 
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
