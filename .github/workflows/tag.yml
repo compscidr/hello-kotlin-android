@@ -18,4 +18,24 @@ jobs:
         uses: loopwerk/tag-changelog@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          exclude_types: other,doc,chore
+
+      # based off example here: https://github.com/loopwerk/tag-changelog/commit/20ca6a4b3f21b7feade68bea88f5cce5bbbdc4b7
+      - name: Read CHANGELOG.md
+        id: readfile
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./CHANGELOG.md
+
+      - name: Write to CHANGELOG.md
+        uses: DamianReeves/write-file-action@master
+        with:
+          path: ./CHANGELOG.md
+          contents: ${{ steps.changelog.outputs.changelog }}${{ steps.readfile.outputs.content }}
+          write-mode: overwrite
+
+      - name: Commit and push CHANGELOG.md
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: CHANGELOG.md
+          message: "chore: Update CHANGELOG.md"
+          branch: main
