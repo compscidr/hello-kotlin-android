@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        agp_version = '8.0.1'
+        agp_version = '8.0.2'
         kotlin_version = '1.8.22'
         hilt_version = '2.46.1'
         jupiter_version = '5.9.3'
