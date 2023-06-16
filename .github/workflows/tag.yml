@@ -18,6 +18,7 @@ jobs:
         uses: loopwerk/tag-changelog@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          exclude: other,doc,chore,build
 
       # based off example here: https://github.com/loopwerk/tag-changelog/commit/20ca6a4b3f21b7feade68bea88f5cce5bbbdc4b7
       - name: Read CHANGELOG.md
