@@ -26,5 +26,16 @@ This aims to be a starter repo with all of the following tooling setup:
 Secrets are passed in via `local.properties` or `.env` or via environment variables. There is an example in the GH workflows which shows how to pass in via
 `local.properties` and via environment variables. It will also work with a `.env` in the app directory.
 
+## Merge-backs
+Ideally you find no diff:
+https://github.com/compscidr/hello-kotlin-android/compare/main...production
+https://github.com/compscidr/hello-kotlin-android/compare/main...staging
+https://github.com/compscidr/hello-kotlin-android/compare/staging...production
+
+If you find a diff, check the 2-dot commit history to see if it's a merge-back. If it is, then the 2-dot history will be empty:
+https://github.com/compscidr/hello-kotlin-android/compare/main..production
+https://github.com/compscidr/hello-kotlin-android/compare/main..staging
+https://github.com/compscidr/hello-kotlin-android/compare/staging..production
+
 TODO:
 * [Firebase](https://firebase.google.com/docs/crashlytics)
