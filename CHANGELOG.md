@@ -1,3 +1,12 @@
+# 1.0.7 - 2023-06-16
+
+## Chores
+- Update CHANGELOG.md
+
+## Other Changes
+- Added semver override to fix zero version issue
+- forgot to define semver
+
 # 1.0.6 - 2023-06-16
 
 ## Chores
