@@ -1,3 +1,14 @@
+# 1.0.6 - 2023-06-16
+
+## Chores
+- Update CHANGELOG.md
+
+## Other Changes
+- fix syntax
+- Merge branch 'main' of github.com:compscidr/hello-kotlin-android
+- added excludes for the changelog
+- still trying at triggering on tags
+
 # 1.0.5 - 2023-06-16
 
 ## Chores
