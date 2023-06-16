@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  # triggers on tag creation
+  create:
 
 jobs:
   deploy-dev:
