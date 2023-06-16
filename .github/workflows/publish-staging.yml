@@ -3,7 +3,7 @@ name: Gradle Build
 on:
   push:
     branches:
-      - main
+      - staging
 
 jobs:
   deploy:
@@ -32,7 +32,7 @@ jobs:
         env:
           GH_USER: ${{ secrets.GH_USER }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: ./gradlew assemble bundle publishAllPublicationsToGithubPackagesRepository
+        run: ./gradlew assemble bundle publishStagingPublicationToGithubPackagesRepository
       # https://github.com/actions/checkout/issues/715
       # https://github.com/actions/checkout/pull/579
       - name: clean local tags
