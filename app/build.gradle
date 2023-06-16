@@ -161,6 +161,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 appVersioning {
     overrideVersionCode { gitTag, providers, variantInfo ->
         gitTag.commitsSinceLatestTag
+        semVer.major * 2000000 + semVer.minor * 20000 + semVer.patch * 200 + gitTag.commitsSinceLatestTag
     }
 }
 
