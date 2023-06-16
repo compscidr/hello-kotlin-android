@@ -1,6 +1,8 @@
 name: Gradle Build
 
-on: [push]
+on:
+  pull_request:
+    types: [ opened, synchronize ]
 
 jobs:
   build:
