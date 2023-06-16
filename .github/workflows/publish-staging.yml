@@ -22,8 +22,6 @@ jobs:
         uses: android-actions/setup-android@v2
       - name: Create local.properties file
         run: echo PROPERTY_SECRET=property_test >> local.properties
-      - name: Build with Gradle
-        run: ./gradlew clean build --no-build-cache
       - name: Export environment variables
         run: |
           echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/release/version_name.txt)" >> $GITHUB_ENV
@@ -32,4 +30,4 @@ jobs:
         env:
           GH_USER: ${{ secrets.GH_USER }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: ./gradlew assemble bundle publishStagingPublicationToGithubPackagesRepository
+        run: ./gradlew clean --no-build-cache publishStagingPublicationToGithubPackagesRepository
