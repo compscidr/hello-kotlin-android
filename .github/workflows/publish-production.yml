@@ -6,7 +6,7 @@ on:
       - production
 
 jobs:
-  deploy:
+  deploy-production:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
