@@ -33,15 +33,13 @@ https://github.com/compscidr/hello-kotlin-android/compare/staging..main
 https://github.com/compscidr/hello-kotlin-android/compare/production..staging
 
 ## Merge-backs
+NOTE: the mergeback should be a merge commit, not a squash commit or will result in a diff when
+comparing branches later on.
+
 Ideally you find no diff:
 https://github.com/compscidr/hello-kotlin-android/compare/main...production
 https://github.com/compscidr/hello-kotlin-android/compare/main...staging
 https://github.com/compscidr/hello-kotlin-android/compare/staging...production
-
-If you find a diff, check the 2-dot commit history to see if it's a merge-back. If it is, then the 2-dot history will be empty:
-https://github.com/compscidr/hello-kotlin-android/compare/main..production
-https://github.com/compscidr/hello-kotlin-android/compare/main..staging
-https://github.com/compscidr/hello-kotlin-android/compare/staging..production
 
 TODO:
 * [Firebase](https://firebase.google.com/docs/crashlytics)
