@@ -158,9 +158,13 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 // https://github.com/ReactiveCircus/app-versioning
+import io.github.reactivecircus.appversioning.SemVer
+
 appVersioning {
+    fetchTagsWhenNoneExistsLocally.set(true)
     overrideVersionCode { gitTag, providers, variantInfo ->
-        gitTag.commitsSinceLatestTag
+        def semVer = SemVer.fromGitTag(gitTag)
+        semVer.major * 2000000 + semVer.minor * 20000 + semVer.patch * 200 + gitTag.commitsSinceLatestTag
     }
 }
 
