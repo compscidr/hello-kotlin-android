@@ -26,6 +26,11 @@ This aims to be a starter repo with all of the following tooling setup:
 Secrets are passed in via `local.properties` or `.env` or via environment variables. There is an example in the GH workflows which shows how to pass in via
 `local.properties` and via environment variables. It will also work with a `.env` in the app directory.
 
+## Note about squashing
+Do not do squash merges to the staging or production branches, or in the mergebacks to main, or
+there will be nothing but trouble. See the following for more details:
+https://github.com/orgs/community/discussions/10809
+
 ## Staging release
 https://github.com/compscidr/hello-kotlin-android/compare/staging...main
 
