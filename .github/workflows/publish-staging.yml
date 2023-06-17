@@ -31,6 +31,7 @@ jobs:
       - uses: technote-space/get-diff-action@v6
         with:
           GET_FILE_DIFF: true
+          DIFF_FILTER: 'AMRCD'
       - name: Build and Publish Release
         env:
           GH_USER: ${{ secrets.GH_USER }}
