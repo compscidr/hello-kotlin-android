@@ -21,6 +21,10 @@ jobs:
         with:
           GET_FILE_DIFF: true
           DIFF_FILTER: 'AMRCD'
+      - name: Sets env variable if we're a tag
+        run: |
+          echo "GIT_DIFF=tag" >> $GITHUB_ENV
+        if: startsWith(github.ref, 'refs/tags/')
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
