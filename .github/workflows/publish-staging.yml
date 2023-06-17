@@ -13,23 +13,36 @@ jobs:
         with:
           fetch-depth: 0
           clean: true
+      # skip actually pushing the build if the diff is zero because this means its a merge-back and
+      # we'll get a conflict because the commits hasn't increased
+      - uses: technote-space/get-diff-action@v6
+        with:
+          GET_FILE_DIFF: true
+          DIFF_FILTER: 'AMRCD'
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: temurin
+        if: env.GIT_DIFF
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
+        if: env.GIT_DIFF
       - name: Create local.properties file
         run: echo PROPERTY_SECRET=property_test >> local.properties
+        if: env.GIT_DIFF
+      # if we don't do this it doesn't generate the versioning files
       - name: Build with Gradle
         run: ./gradlew clean build --no-build-cache
+        if: env.GIT_DIFF
       - name: Export environment variables
         run: |
           echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/release/version_name.txt)" >> $GITHUB_ENV
           echo "VERSION_CODE=$(cat app/build/outputs/app_versioning/release/version_code.txt)" >> $GITHUB_ENV
+        if: env.GIT_DIFF
       - name: Build and Publish Release
         env:
           GH_USER: ${{ secrets.GH_USER }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: ./gradlew assemble bundle publishStagingPublicationToGithubPackagesRepository
+        run: ./gradlew clean --no-build-cache publishStagingPublicationToGithubPackagesRepository
+        if: env.GIT_DIFF
