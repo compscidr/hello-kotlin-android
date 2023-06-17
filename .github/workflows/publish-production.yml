@@ -26,8 +26,13 @@ jobs:
         run: |
           echo "VERSION_NAME=$(cat app/build/outputs/app_versioning/release/version_name.txt)" >> $GITHUB_ENV
           echo "VERSION_CODE=$(cat app/build/outputs/app_versioning/release/version_code.txt)" >> $GITHUB_ENV
+      # skip actually pushing the build if the diff is zero because this means its a merge-back and
+      # we'll get a conflict because the commits hasn't increased
+      - uses: technote-space/get-diff-action@v4
+        id: git-diff
       - name: Build and Publish Release
         env:
           GH_USER: ${{ secrets.GH_USER }}
           GH_PAT: ${{ secrets.GH_PAT }}
         run: ./gradlew clean --no-build-cache publishProductionPublicationToGithubPackagesRepository
+        if: steps.git-diff.outputs.diff != ''
