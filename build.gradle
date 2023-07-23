@@ -5,7 +5,7 @@ buildscript {
         agp_version = '8.0.2'
         kotlin_version = '1.8.22'
         hilt_version = '2.46.1'
-        jupiter_version = '5.9.3'
+        jupiter_version = '5.10.0'
         slf4j_version = '2.0.7'
         mockk_version = '1.13.5'
     }
