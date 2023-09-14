@@ -6,7 +6,7 @@ buildscript {
         kotlin_version = '1.8.22'
         hilt_version = '2.46.1'
         jupiter_version = '5.10.0'
-        slf4j_version = '2.0.7'
+        slf4j_version = '2.0.9'
         mockk_version = '1.13.7'
     }
     repositories {
