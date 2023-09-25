@@ -32,7 +32,7 @@ jobs:
           distribution: temurin
         if: env.GIT_DIFF
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3
         if: env.GIT_DIFF
       - name: Create local.properties file
         run: echo PROPERTY_SECRET=property_test >> local.properties
