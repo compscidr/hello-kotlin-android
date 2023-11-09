@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class HierarchicalTest {
     @Test
-    fun FooTest() {
+    fun fooTest() {
         val foo = Foo()
         foo.name = "Test"
         val bar = Bar()
@@ -22,12 +22,14 @@ class HierarchicalTest {
     @Test
     fun givenHierarchicalClass_whenMockingIt_thenReturnProperValue() {
         // given
-        val foo = mockk<Foo> {
-            every { name } returns "Karol"
-            every { bar } returns mockk {
-                every { nickname } returns "Tomato"
+        val foo =
+            mockk<Foo> {
+                every { name } returns "Karol"
+                every { bar } returns
+                    mockk {
+                        every { nickname } returns "Tomato"
+                    }
             }
-        }
 
         // when
         val name = foo.name
