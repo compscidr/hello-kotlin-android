@@ -13,7 +13,6 @@ import org.junit.platform.commons.logging.LoggerFactory
  * - for local.properties: https://github.com/google/secrets-gradle-plugin
  */
 class SecretsTest {
-
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @Test fun envSecretTest() {
@@ -26,7 +25,14 @@ class SecretsTest {
     @Test fun localPropertyTest() {
         val propertySecret = BuildConfig.PROPERTY_SECRET
         logger.info { "propertySecret: $propertySecret" }
-        assertTrue(propertySecret.isNotEmpty(), "Expecting a value in the PROPERTY_SECRET. You're probably missing a definition in the local.properties file")
-        assertEquals("property_test", propertySecret, "Expecting the PROPERTY_SECRET secret to be 'property_test', set this in your local_properties file or GH actions secret")
+        assertTrue(
+            propertySecret.isNotEmpty(),
+            "Expecting a value in the PROPERTY_SECRET. You're probably missing a definition in the local.properties file",
+        )
+        assertEquals(
+            "property_test",
+            propertySecret,
+            "Expecting the PROPERTY_SECRET secret to be 'property_test', set this in your local_properties file or GH actions secret",
+        )
     }
 }

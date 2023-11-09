@@ -5,9 +5,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TestComponent @Inject constructor() {
-    private val logger = LoggerFactory.getLogger(javaClass)
-    fun someFunction() {
-        logger.debug("testComponent: someFunction()")
+class TestComponent
+    @Inject
+    constructor() {
+        private val logger = LoggerFactory.getLogger(javaClass)
+
+        fun someFunction() {
+            logger.debug("testComponent: someFunction()")
+        }
     }
-}
