@@ -1,4 +1,4 @@
-name: Gradle Build
+name: Test and Reports
 
 on:
   push:
@@ -56,6 +56,10 @@ jobs:
             app/build/outputs
       - name: Debug report paths
         run: |
+          pwd
+          ls -la ./app/build
+          ls -la ./app/build/reports
+          ls -la ./app/build/reports/jacoco
           ls -la ./app/build/reports/jacoco/jacocoTestReportDebugUnitTest
           ls -la ./lib/build/reports/jacoco/test
 

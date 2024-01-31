@@ -1,4 +1,4 @@
-name: Gradle Build
+name: Dev Deploy
 
 on:
   push:
