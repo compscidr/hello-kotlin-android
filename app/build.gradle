@@ -9,7 +9,7 @@ plugins {
     id 'org.jmailen.kotlinter'
     id 'jacoco'
     id "com.google.android.libraries.mapsplatform.secrets-gradle-plugin" version "2.0.1"
-    //id 'org.jetbrains.dokka'
+    id 'org.jetbrains.dokka'
 }
 
 android {

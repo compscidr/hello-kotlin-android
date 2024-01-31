@@ -14,7 +14,7 @@ This aims to be a starter repo with all of the following tooling setup:
 * [Codecov](https://codecov.io/)
 * [ktlint](https://ktlint.github.io/)
 * [Mockk](https://mockk.io/ANDROID.html)
-* ~[Dokka](https://github.com/Kotlin/dokka)~ - temp broken until support catches up
+* [Dokka](https://github.com/Kotlin/dokka)
 * [r8](https://android-developers.googleblog.com/2018/11/r8-new-code-shrinker-from-google-is.html)
 * [Dagger2](https://medium.com/@elye.project/dagger-2-for-dummies-in-kotlin-with-one-page-simple-code-project-618a5f9f2fe8)
 * [Logback Android](https://github.com/tony19/logback-android)
