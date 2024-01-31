@@ -54,6 +54,10 @@ jobs:
           path: |
             app/build/reports
             app/build/outputs
+      - name: Debug report paths
+        run: |
+          ls -la ./app/build/reports/jacoco/jacocoTestReportDebugUnitTest
+          ls -la ./lib/build/reports/jacoco/test
 
       - name: cleanup adb
         if: always()
@@ -66,7 +70,6 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: unittests
           files: |
-            ./app/build/reports/coverage/androidTest/debug/connected/report.xml
             ./app/build/reports/jacoco/jacocoTestReportDebugUnitTest/jacocoTestReportDebugUnitTest.xml
             ./lib/build/reports/jacoco/test/jacocoTestReport.xml
 
