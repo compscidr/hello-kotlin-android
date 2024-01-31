@@ -1,26 +1,39 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm'
-}
-
-compileJava   {
-    sourceCompatibility = '11'
-    targetCompatibility = '11'
+    id 'jacoco'
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.withType(KotlinCompile).configureEach {
-    kotlinOptions {
-        jvmTarget = "11"
+kotlin {
+    jvmToolchain(17)
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
     }
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 dependencies {
     implementation "org.slf4j:slf4j-api:${slf4j_version}"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$jupiter_version"
+    testImplementation "org.slf4j:slf4j-simple:${slf4j_version}"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.10.1"
 }

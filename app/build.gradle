@@ -31,8 +31,8 @@ android {
 
     // 3) Java 8 is required
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     packagingOptions {
         jniLibs {
@@ -54,6 +54,7 @@ android {
             shrinkResources false
             minifyEnabled false
             testCoverageEnabled true
+            enableUnitTestCoverage true
         }
     }
 
@@ -104,6 +105,9 @@ android {
             }
         }
     }
+    buildFeatures {
+        buildConfig true
+    }
 }
 
 dependencies {
@@ -151,10 +155,8 @@ jacoco {
     toolVersion = '0.8.11'
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+kotlin {
+    jvmToolchain(17)
 }
 
 // https://github.com/ReactiveCircus/app-versioning
@@ -166,6 +168,30 @@ appVersioning {
         def semVer = SemVer.fromGitTag(gitTag)
         semVer.major * 2000000 + semVer.minor * 20000 + semVer.patch * 200 + gitTag.commitsSinceLatestTag
     }
+}
+
+// for some rason running the jacocoTestReport generates a report for the release unit tests that
+// works with jacoco, however it doesn't add it to the
+tasks.create(name: "jacocoTestReportUnitTests", type: JacocoReport, dependsOn: "jacocoTestReport") {
+    group = "Reporting" // existing group containing tasks for generating linting reports etc.
+    description = "Generate JVM unit test coverage reports using Jacoco."
+
+    reports {
+        // human readable (written into './build/reports/jacoco/unitTestCoverageReport/html')
+        html.required = true
+        // CI-readable (written into './build/reports/jacoco/unitTestCoverageReport/unitTestCoverageReport.xml')
+        xml.required = true
+    }
+
+    // Execution data generated when running the tests against classes instrumented by the JaCoCo agent.
+    // This is enabled with 'enableUnitTestCoverage' in the 'debug' build type.
+    executionData.from = fileTree(dir: "${project.buildDir}/jacoco/", includes: ["/testReleaseUnitTest.exec"])
+
+    // Compiled Kotlin class files are written into build-variant-specific subdirectories of 'build/tmp/kotlin-classes'.
+    classDirectories.from = "${project.buildDir}/tmp/kotlin-classes/release"
+
+    // To produce an accurate report, the bytecode is mapped back to the original source code.
+    sourceDirectories.from = "${project.projectDir}/src/main/java"
 }
 
 apply from: file('secrets.gradle')
