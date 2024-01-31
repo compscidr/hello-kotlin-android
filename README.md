@@ -55,4 +55,5 @@ https://github.com/compscidr/hello-kotlin-android/compare/main...staging
 https://github.com/compscidr/hello-kotlin-android/compare/staging...production
 
 TODO:
-* [Firebase](https://firebase.google.com/docs/crashlytics)
+* [Firebase Crashlytics](https://firebase.google.com/docs/crashlytics)
+* [Jetpack Compose](https://developer.android.com/jetpack/compose)
