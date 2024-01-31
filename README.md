@@ -22,6 +22,14 @@ This aims to be a starter repo with all of the following tooling setup:
 * Unit test examples
 * Instrumented test examples
 
+## Codecov notes
+Coverage is provided for:
+- Instrumented on-device android tests
+- JVM unit tests from the android app
+- JVM unit tests from the library
+They are each uploaded separately, as I had issues with the code cov action providing more than a single report at once. Codecov
+can handle the multiple uploads and merge them together anyhow.
+
 ## Secrets
 Secrets are passed in via `local.properties` or `.env` or via environment variables. There is an example in the GH workflows which shows how to pass in via
 `local.properties` and via environment variables. It will also work with a `.env` in the app directory.
