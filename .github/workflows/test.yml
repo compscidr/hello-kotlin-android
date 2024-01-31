@@ -74,9 +74,8 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: unittests
-          files: |
-            ./app/build/reports/jacoco/jacocoTestReportUnitTests/jacocoTestReportUnitTests.xml
-            ./lib/build/reports/jacoco/test/jacocoTestReport.xml
+          files: ./app/build/reports/jacoco/jacocoTestReportUnitTests/jacocoTestReportUnitTests.xml
+          # ./lib/build/reports/jacoco/test/jacocoTestReport.xml
 
       - name: Upload Instrumented Tests Report to CodeCov
         # https://github.com/codecov/codecov-action
