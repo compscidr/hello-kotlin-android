@@ -1,0 +1,14 @@
+name: Test Triggered Workflow
+on:
+  workflow_run:
+    workflows: ["Test and Reports"]
+    types: ["completed"]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dummy Step
+        run: echo "got here"
+          
+
