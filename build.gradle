@@ -7,7 +7,7 @@ buildscript {
         hilt_version = '2.50'
         jupiter_version = '5.10.2'
         slf4j_version = '2.0.12'
-        mockk_version = '1.13.9'
+        mockk_version = '1.13.10'
         dokka_version = '1.9.10'
     }
     repositories {
