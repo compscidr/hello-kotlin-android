@@ -83,12 +83,3 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: instrumentedtests
           files: ./app/build/reports/coverage/androidTest/debug/connected/report.xml
-
-      # https://github.com/actions/checkout/issues/715
-      # https://github.com/actions/checkout/pull/579
-      - name: clean local tags
-        if: always()
-        run: |
-          cd /tmp/hello-kotlin-android/hello-kotlin-android/hello-kotlin-android && 
-          git config --global --add safe.directory /tmp/hello-kotlin-android/hello-kotlin-android/hello-kotlin-android &&
-          git tag -d $(git tag -l)
