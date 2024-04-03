@@ -4,7 +4,7 @@ buildscript {
     ext {
         agp_version = '8.3.1'
         kotlin_version = '1.9.23'
-        hilt_version = '2.50'
+        hilt_version = '2.51.1'
         jupiter_version = '5.10.2'
         slf4j_version = '2.0.12'
         mockk_version = '1.13.10'
