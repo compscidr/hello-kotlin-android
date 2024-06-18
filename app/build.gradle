@@ -19,7 +19,7 @@ android {
     defaultConfig {
         testInstrumentationRunnerArguments runnerBuilder: 'de.mannodermaus.junit5.AndroidJUnit5Builder'
         applicationId "com.example.myapplication"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 34
         versionCode 1
         versionName "1.0"
