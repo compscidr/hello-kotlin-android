@@ -138,7 +138,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-params:$jupiter_version"
 
     // 5) Test Runner, if you don't have it already
-    androidTestImplementation "androidx.test:runner:1.5.2"
+    androidTestImplementation "androidx.test:runner:1.6.1"
     androidTestImplementation "org.junit.jupiter:junit-jupiter-api:$jupiter_version"
 
     // 6) The instrumentation test companion libraries
