@@ -3,6 +3,7 @@ package com.example.myapplication
 import androidx.test.platform.app.InstrumentationRegistry
 import de.mannodermaus.junit5.ActivityScenarioExtension
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Timeout
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -24,7 +25,7 @@ class ExampleInstrumentedTest {
             MainActivity::class.java,
         )
 
-    // @Tag("TEST1") // tags broken: https://github.com/mannodermaus/android-junit5/issues/298
+    @Tag("TEST1") // tags broken: https://github.com/mannodermaus/android-junit5/issues/298
     @Test
     fun useAppContext() {
         // Context of the app under test.
@@ -35,13 +36,13 @@ class ExampleInstrumentedTest {
         scenario.onActivity { }
     }
 
-    // @Tag("TEST2")
+    @Tag("TEST2")
     @Test
     fun test2() {
         logger.debug("test2")
     }
 
-    // @Tag("TEST3")
+    @Tag("TEST3")
     @Test
     fun test3() {
         logger.debug("test3")
