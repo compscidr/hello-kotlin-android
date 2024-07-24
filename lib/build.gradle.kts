@@ -17,6 +17,12 @@ jacoco {
     toolVersion = "0.8.12"
 }
 
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
     finalizedBy("jacocoTestReport")
