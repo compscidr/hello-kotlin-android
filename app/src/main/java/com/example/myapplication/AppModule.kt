@@ -12,13 +12,9 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun provideTestComponent(): TestComponent {
-        return TestComponent()
-    }
+    fun provideTestComponent(): TestComponent = TestComponent()
 
     @Provides
     @Singleton
-    fun provideMyClass(): MyClass {
-        return MyClass()
-    }
+    fun provideMyClass(): MyClass = MyClass()
 }
