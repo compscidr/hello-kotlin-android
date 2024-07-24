@@ -31,6 +31,7 @@ fun buildConfigString(key: String): String {
 
 plugins {
     id("jacoco")
+    id("maven-publish")
     alias(libs.plugins.android.application)
     alias(libs.plugins.app.versioning)
     alias(libs.plugins.de.mannodermaus.android.junit5)
@@ -141,4 +142,51 @@ appVersioning {
         val semVer = SemVer.fromGitTag(gitTag)
         semVer.major * 2000000 + semVer.minor * 20000 + semVer.patch * 200 + gitTag.commitsSinceLatestTag
     }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/compscidr/hello-kotlin-android")
+            credentials {
+                username = propertyEnvOrEmpty("GH_USER")
+                password = propertyEnvOrEmpty("GH_PAT")
+            }
+        }
+        maven {
+            name = "CustomMavenRepo"
+            url = uri("file://${buildDir}/repo")
+        }
+    }
+    publications {
+        // in theory each of these artifacts might have different compiled in secrets or something
+        // to make them different, but for now they're all the same just to test the workflow
+        register("dev", MavenPublication::class) {
+            groupId = "com.example"
+            artifactId = "myapplication.dev"
+            version = propertyEnvOrEmpty("VERSION_NAME") + "-" + propertyEnvOrEmpty("VERSION_CODE")
+            artifact("$buildDir/outputs/apk/release/app-release-unsigned.apk")
+            artifact("$buildDir/outputs/bundle/release/app-release.aab")
+        }
+        register("staging", MavenPublication::class) {
+            groupId = "com.example"
+            artifactId = "myapplication.staging"
+            version = propertyEnvOrEmpty("VERSION_NAME") + "-" + propertyEnvOrEmpty("VERSION_CODE")
+            artifact("$buildDir/outputs/apk/release/app-release-unsigned.apk")
+            artifact("$buildDir/outputs/bundle/release/app-release.aab")
+        }
+        register("production", MavenPublication::class) {
+            groupId = "com.example"
+            artifactId = "myapplication"
+            version = propertyEnvOrEmpty("VERSION_NAME") + "-" + propertyEnvOrEmpty("VERSION_CODE")
+            artifact("$buildDir/outputs/apk/release/app-release-unsigned.apk")
+            artifact("$buildDir/outputs/bundle/release/app-release.aab")
+        }
+    }
+}
+
+tasks.withType<PublishToMavenRepository>().configureEach() {
+    dependsOn("assembleRelease")
+    dependsOn("bundleRelease")
 }
