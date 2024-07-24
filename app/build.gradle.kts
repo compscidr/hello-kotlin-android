@@ -92,53 +92,6 @@ android {
         finalizedBy("jacocoTestReport")
     }
 
-//    testOptions {
-//        unitTests.all {
-//            useJUnitPlatform()
-//            jacoco {
-//                includeNoLocationClasses = true
-//                excludes = [
-//                        'jdk.internal.*',
-//                ]
-//            }
-//        }
-//        // should let the tests run with with gradle via -DincludeTags="tag1,tag2" -DexcludeTags="tag3,tag4"
-//        // https://github.com/mannodermaus/android-junit5/wiki/Configuration
-//        // https://junit.org/junit5/docs/current/user-guide/#writing-tests-tagging-and-filtering
-//        // https://www.vogella.com/tutorials/AndroidTesting/article.html
-//        junitPlatform {
-//            filters {
-//                //includeTags 'TEST1'
-//                //excludeTags 'TEST2'
-//            }
-//        }
-//        // should let the tests run with with gradle via -DincludeTags="tag1,tag2" -DexcludeTags="tag3,tag4"
-//        // https://github.com/mannodermaus/android-junit5/wiki/Configuration
-//        // https://junit.org/junit5/docs/current/user-guide/#writing-tests-tagging-and-filtering
-//        // https://www.vogella.com/tutorials/AndroidTesting/article.html
-//        junitPlatform {
-//            String includedTagsProperty = System.getProperty("includeTags")
-//            boolean includedTagsPropertySet = includedTagsProperty != null
-//
-//            String excludedTagsProperty = System.getProperty("excludeTags")
-//            boolean excludedTagsPropertySet = excludedTagsProperty != null
-//
-//            if (includedTagsPropertySet && excludedTagsPropertySet) {
-//                filters("debug") {
-//                    includeTags includedTagsProperty
-//                    excludeTags excludedTagsProperty
-//                }
-//            } else if (includedTagsPropertySet && !excludedTagsPropertySet) {
-//                filters("debug") {
-//                    includeTags includedTagsProperty
-//                }
-//            } else if (!includedTagsPropertySet && excludedTagsPropertySet) {
-//                filters("debug") {
-//                    excludeTags excludedTagsProperty
-//                }
-//            }
-//        }
-//    }
     buildFeatures {
         buildConfig = true
     }
@@ -189,27 +142,3 @@ appVersioning {
         semVer.major * 2000000 + semVer.minor * 20000 + semVer.patch * 200 + gitTag.commitsSinceLatestTag
     }
 }
-
-// for some reason running the jacocoTestReport generates a report for the release unit tests that
-// works with jacoco, however it doesn't add it to the
-//tasks.create("jacocoTestReportUnitTests", type: JacocoReport, dependsOn: "jacocoTestReport") {
-//    group = "Reporting" // existing group containing tasks for generating linting reports etc.
-//    description = "Generate JVM unit test coverage reports using Jacoco."
-//
-//    reports {
-//        // human readable (written into './build/reports/jacoco/unitTestCoverageReport/html')
-//        html.required = true
-//        // CI-readable (written into './build/reports/jacoco/unitTestCoverageReport/unitTestCoverageReport.xml')
-//        xml.required = true
-//    }
-//
-//    // Execution data generated when running the tests against classes instrumented by the JaCoCo agent.
-//    // This is enabled with 'enableUnitTestCoverage' in the 'debug' build type.
-//    executionData.from = fileTree(dir: "${project.buildDir}/jacoco/", includes: ["/testReleaseUnitTest.exec"])
-//
-//    // Compiled Kotlin class files are written into build-variant-specific subdirectories of 'build/tmp/kotlin-classes'.
-//    classDirectories.from = "${project.buildDir}/tmp/kotlin-classes/release"
-//
-//    // To produce an accurate report, the bytecode is mapped back to the original source code.
-//    sourceDirectories.from = "${project.projectDir}/src/main/java"
-//}
