@@ -101,17 +101,9 @@ android {
 junitPlatform {
     // this is for the non-android unit tests, only required with the mannodermaus plugin
     jacocoOptions {
-        html {
-            enabled = true
-            destination.set(layout.buildDirectory.file("reports/jacoco/${name}"))
-        }
-        xml {
-            enabled = true
-            destination.set(layout.buildDirectory.file("reports/jacoco/${name}.xml"))
-        }
-        csv {
-            enabled = false
-        }
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
     }
 }
 
