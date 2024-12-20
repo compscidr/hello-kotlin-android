@@ -20,7 +20,7 @@ logback-classic = "1.5.14"
 logback-papertail = "1.0.0"
 mannodermaus_junit5_plugin = "1.11.2.0"
 mannodermaus_junit5 = "1.6.0"
-mockk = "1.13.13"
+mockk = "1.13.14"
 multidex = "2.0.1"
 slf4j = "2.0.16"     # this should depend on what is supported by: https://github.com/tony19/logback-android
 
