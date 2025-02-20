@@ -53,10 +53,6 @@ jobs:
             app/build/reports
             app/build/outputs
 
-      - name: cleanup adb
-        if: always()
-        run: adb kill-server
-
       - name: Upload Lib Unit Tests Report to CodeCov
         # https://github.com/codecov/codecov-action
         uses: codecov/codecov-action@v5
