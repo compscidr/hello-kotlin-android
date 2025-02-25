@@ -116,8 +116,9 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
+    testImplementation(platform(libs.junit.bom))
     testImplementation(libs.bundles.test)
-    testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.bundles.test.runtime)
 
     androidTestImplementation(libs.bundles.android.test)
     androidTestRuntimeOnly(libs.de.manodermaus.android.junit5.runner)

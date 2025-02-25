@@ -31,7 +31,8 @@ tasks.withType<Test>().configureEach {
 
 dependencies {
     api(libs.slf4j.api)
-    testImplementation(libs.bundles.test)
-    testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.logback.classic)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.bundles.test)
+    testRuntimeOnly(libs.bundles.test.runtime)
 }

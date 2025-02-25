@@ -10,7 +10,7 @@ coreKtxVersion = "1.15.0"
 dokka = "2.0.0"
 dotenv = "4.0.0"
 jacoco = "0.8.12"
-jupiter = "5.11.4"
+jupiter = "5.12.0"
 hilt = "2.55"
 ksp = "2.1.10-1.0.30"
 kotlin = "2.1.10"
@@ -34,8 +34,10 @@ androidx_test_uiautomator = { module = "androidx.test.uiautomator:uiautomator", 
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
+junit-bom = { module = "org.junit:junit-bom", version="5.12.0" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
+junit-jupiter-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 logback-android = { module = "com.github.tony19:logback-android", version.ref = "logback-android" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-classic" }
 logback-papertrail = { module = "com.papertrailapp:logback-syslog4j", version.ref = "logback-papertail" }
@@ -47,8 +49,9 @@ slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
 [bundles]
 # todo: include mockk-android in android-test buit need to wait for: https://github.com/mannodermaus/android-junit5/issues/338
-android-test = ["junit-jupiter-api", "androidx_test_runner", "androidx_test_monitor", "androidx_test_uiautomator", "de-manodermaus-android-junit5"]
+android-test = ["junit-jupiter-api", "androidx_test_runner", "androidx_test_monitor", "androidx_test_uiautomator", "de-manodermaus-android-junit5", "mockk-android", "junit-jupiter-platform-launcher"]
 test = ["junit-jupiter-api", "mockk"]
+test-runtime = ["junit-jupiter-engine", "junit-jupiter-platform-launcher"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
