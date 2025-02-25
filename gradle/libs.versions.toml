@@ -22,7 +22,7 @@ mannodermaus_junit5_plugin = "1.11.3.0"
 mannodermaus_junit5 = "1.6.0"
 mockk = "1.13.16"
 multidex = "2.0.1"
-slf4j = "2.0.16"     # this should depend on what is supported by: https://github.com/tony19/logback-android
+slf4j = "2.0.17"     # this should depend on what is supported by: https://github.com/tony19/logback-android
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
