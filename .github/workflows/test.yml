@@ -23,6 +23,8 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
+      - name: Display host of runner
+        run: hostname
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
       - name: Create local.properties file
