@@ -134,7 +134,7 @@ jacoco {
     toolVersion = libs.versions.jacoco.get()
 }
 
-tasks.withType(JacocoReport::class.java) {
+tasks.withType(JacocoReport::class.java).configureEach {
     executionData(fileTree("build/outputs/code_coverage/debugAndroidTest/connected/").include("**/*.ec"))
     executionData(fileTree("build/outputs/unit_test_code_coverage/debugUnitTest/").include("**/*.exec"))
 }
@@ -196,7 +196,7 @@ publishing {
     }
 }
 
-tasks.withType<PublishToMavenRepository>().configureEach() {
+tasks.withType<PublishToMavenRepository>().configureEach {
     dependsOn("assembleRelease")
     dependsOn("bundleRelease")
 }
