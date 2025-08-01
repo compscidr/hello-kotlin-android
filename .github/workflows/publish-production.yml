@@ -44,5 +44,5 @@ jobs:
         env:
           GH_USER: ${{ secrets.GH_USER }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: ./gradlew clean --no-build-cache publishProductionPublicationToGithubPackagesRepository
+        run: ./gradlew --no-build-cache publishProductionPublicationToGithubPackagesRepository
         if: env.GIT_DIFF
