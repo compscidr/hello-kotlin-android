@@ -166,7 +166,7 @@ publishing {
         }
         maven {
             name = "CustomMavenRepo"
-            url = uri("file://${buildDir}/repo")
+            url = uri("file://${layout.buildDirectory.get().asFile}/repo")
         }
     }
     publications {
@@ -176,15 +176,15 @@ publishing {
             groupId = "com.example"
             artifactId = "myapplication.dev"
             version = propertyEnvOrEmpty("VERSION_NAME") + "-" + propertyEnvOrEmpty("VERSION_CODE")
-            artifact(layout.buildDirectory.file("/outputs/apk/release/app-release-unsigned.apk"))
-            artifact(layout.buildDirectory.file("o/utputs/bundle/release/app-release.aab"))
+            artifact(layout.buildDirectory.file("outputs/apk/release/app-release-unsigned.apk"))
+            artifact(layout.buildDirectory.file("outputs/bundle/release/app-release.aab"))
         }
         register("staging", MavenPublication::class) {
             groupId = "com.example"
             artifactId = "myapplication.staging"
             version = propertyEnvOrEmpty("VERSION_NAME") + "-" + propertyEnvOrEmpty("VERSION_CODE")
-            artifact(layout.buildDirectory.file("/outputs/apk/release/app-release-unsigned.apk"))
-            artifact(layout.buildDirectory.file("/outputs/bundle/release/app-release.aab"))
+            artifact(layout.buildDirectory.file("outputs/apk/release/app-release-unsigned.apk"))
+            artifact(layout.buildDirectory.file("outputs/bundle/release/app-release.aab"))
         }
         register("production", MavenPublication::class) {
             groupId = "com.example"
