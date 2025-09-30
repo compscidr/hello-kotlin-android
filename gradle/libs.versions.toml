@@ -35,7 +35,7 @@ core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
-junit-bom = { module = "org.junit:junit-bom", version="5.13.4" }
+junit-bom = { module = "org.junit:junit-bom", version="5.14.0" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 junit-jupiter-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 logback-android = { module = "com.github.tony19:logback-android", version.ref = "logback-android" }
