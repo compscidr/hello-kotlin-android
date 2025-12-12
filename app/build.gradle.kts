@@ -48,7 +48,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.myapplication"
-        minSdk = 23 // with 21 we get a deprecation warning
+        minSdk = 26 // required for mockk-android 1.14.7+
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
