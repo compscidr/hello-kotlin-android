@@ -50,7 +50,7 @@ jobs:
         run: bash ./scripts/clean-packages.sh
       - name: On-Device Instrumented Tests
         run: ./gradlew connectedCheck
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         name: Store Reporting Artifacts
         if: failure()
         with:
