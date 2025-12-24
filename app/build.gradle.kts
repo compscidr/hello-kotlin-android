@@ -98,6 +98,15 @@ android {
     }
 }
 
+configurations.configureEach {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin" && requested.name == "kotlin-metadata-jvm") {
+            useVersion("2.3.0")
+            because("Force kotlin-metadata-jvm to support Kotlin 2.3.0 until Hilt officially supports it")
+        }
+    }
+}
+
 junitPlatform {
     // this is for the non-android unit tests, only required with the mannodermaus plugin
     jacocoOptions {
