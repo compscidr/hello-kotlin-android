@@ -37,7 +37,6 @@ plugins {
     alias(libs.plugins.de.mannodermaus.android.junit5)
     alias(libs.plugins.dokka)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlinter)
 }
