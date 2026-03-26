@@ -39,7 +39,7 @@ jobs:
       - name: Display host of runner
         run: echo $HOST_NAME
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
       - name: Create local.properties file
         run: echo PROPERTY_SECRET=property_test >> local.properties
       - uses: oNaiPs/secrets-to-env-action@v1
