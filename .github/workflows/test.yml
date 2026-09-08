@@ -66,6 +66,17 @@ jobs:
           ACQUIRE_OUTPUT=$(sair-acquire --count 1)
           echo "$ACQUIRE_OUTPUT" | sed -n 's/^export //p' >> "$GITHUB_ENV"
 
+      # AGP 9.4+ runs instrumented tests in a forked Gradle worker whose environment
+      # Gradle strips to LANG/LC_* only, so the scoped ANDROID_ADB_SERVER_PORT never
+      # reaches the adb it spawns and adb hits the proxy's bare port 5037 (no devices).
+      # ponytail: bake the port into the SDK adb; drop once AGP forwards env to its worker.
+      - name: Pin SDK adb to scoped ADB port
+        run: |
+          adb="$ANDROID_HOME/platform-tools/adb"
+          [ -e "$adb.real" ] || mv "$adb" "$adb.real"
+          printf '#!/bin/sh\nexec "%s.real" -P %s "$@"\n' "$adb" "$ANDROID_ADB_SERVER_PORT" > "$adb"
+          chmod +x "$adb"
+
       - name: Uninstall stale APKs
         run: |
           adb devices | grep -w device | awk '{print $1}' | while read serial; do
