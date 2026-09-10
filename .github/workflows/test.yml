@@ -40,10 +40,12 @@ jobs:
         uses: android-actions/setup-android@v4
       - name: Create local.properties file
         run: echo PROPERTY_SECRET=property_test >> local.properties
-      - uses: oNaiPs/secrets-to-env-action@v1
-        with:
-          secrets: ${{ toJSON(secrets) }}
       - name: Build with Gradle
+        env:
+          # The only secret the build reads (BuildConfig.ENV_SECRET). Do not
+          # export all secrets wholesale: GitHub holds every PR that touches a
+          # workflow doing that for manual approval as potentially malicious.
+          ENV_SECRET: ${{ secrets.ENV_SECRET }}
         run: ./gradlew clean build --no-build-cache
       - name: lint
         run: ./gradlew app:lint
