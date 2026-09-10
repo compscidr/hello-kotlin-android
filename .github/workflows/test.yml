@@ -58,15 +58,19 @@ jobs:
       - name: Clean Packages
         run: bash ./scripts/clean-packages.sh
 
-      - name: Install SAIR tools
-        run: curl -fsSL https://raw.githubusercontent.com/compscidr/sair/v0.0.15/install.sh | bash
+      # Only the two bash tools are needed here; the proxy runs on the host.
+      - name: Fetch SAIR tools
+        uses: actions/checkout@v7
+        with:
+          repository: compscidr/sair
+          ref: v0.0.16
+          sparse-checkout: tools
+          path: sair
 
-      # Capture output in a variable rather than piping, so a sair-acquire
-      # failure fails this step instead of being masked by sed's exit code.
+      # sair-acquire (v0.0.16+) appends its exports to $GITHUB_ENV itself.
       - name: Acquire device lock
         run: |
-          ACQUIRE_OUTPUT=$(sair-acquire --count 1)
-          echo "$ACQUIRE_OUTPUT" | sed -n 's/^export //p' >> "$GITHUB_ENV"
+          sair/tools/sair-acquire --count 1 > /dev/null
 
       - name: Uninstall stale APKs
         run: |
@@ -80,7 +84,7 @@ jobs:
 
       - name: Release device lock
         if: always() && env.SAIR_LOCK_ID != ''
-        run: sair-release
+        run: sair/tools/sair-release
 
       - uses: actions/upload-artifact@v7
         name: Store Reporting Artifacts
