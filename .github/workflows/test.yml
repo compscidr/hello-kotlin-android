@@ -15,6 +15,11 @@ jobs:
   build:
 
     runs-on: self-hosted
+    env:
+      # The only secret the build reads (BuildConfig.ENV_SECRET, asserted by
+      # SecretsTest on the device). Do not export all secrets wholesale:
+      # GitHub holds every PR touching such a workflow for manual approval.
+      ENV_SECRET: ${{ secrets.ENV_SECRET }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -41,11 +46,6 @@ jobs:
       - name: Create local.properties file
         run: echo PROPERTY_SECRET=property_test >> local.properties
       - name: Build with Gradle
-        env:
-          # The only secret the build reads (BuildConfig.ENV_SECRET). Do not
-          # export all secrets wholesale: GitHub holds every PR that touches a
-          # workflow doing that for manual approval as potentially malicious.
-          ENV_SECRET: ${{ secrets.ENV_SECRET }}
         run: ./gradlew clean build --no-build-cache
       - name: lint
         run: ./gradlew app:lint
