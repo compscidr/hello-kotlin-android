@@ -37,7 +37,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
 # Pinned to 5.x: on JUnit 6 the android-junit5 runner requires API 35+ and disables all
 # Jupiter instrumented tests below it. See renovate.json. Revisit when all test devices are API 35+.
-junit-bom = { module = "org.junit:junit-bom", version="5.14.4" }
+junit-bom = { module = "org.junit:junit-bom", version="5.14.5" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 junit-jupiter-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 logback-android = { module = "com.github.tony19:logback-android", version.ref = "logback-android" }
